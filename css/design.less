@@ -1,0 +1,106 @@
+/**
+ * This file provides the main design styles for the
+ * bits that surround the content.
+ *
+ * @author Anika Henke <anika@selfthinker.org>
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Clarence Lee <clarencedglee@gmail.com>
+ */
+
+/* tools
+********************************************************************/
+
+/* highlight selected tool */
+.mode_admin a.action.admin,
+.mode_login a.action.login,
+.mode_register a.action.register,
+.mode_profile a.action.profile,
+.mode_recent a.action.recent,
+.mode_index a.action.index,
+.mode_media a.action.media,
+.mode_revisions a.action.revs,
+.mode_backlink a.action.backlink,
+.mode_subscribe a.action.subscribe {
+    font-weight: bold;
+}
+
+form.search {
+    display: block;
+    position: relative;
+    margin-bottom: 0.5em;
+
+    input {
+        width: 18em;
+        padding: .35em 22px .35em .1em;
+    }
+
+    button {
+        background: transparent url(images/search.png) no-repeat 0 0;
+        border-width: 0;
+        width: 19px;
+        height: 14px;
+        text-indent: -99999px;
+        margin-left: -20px;
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+[dir=rtl] form.search {
+    input {
+        padding: .35em .1em .35em 22px;
+    }
+
+    button {
+        background-position: 5px 0;
+        margin-left: 0;
+        margin-right: -20px;
+        position: relative;
+    }
+}
+
+/* content
+********************************************************************/
+
+/* license note under edit window */
+.dokuwiki div.license {
+    font-size: 93.75%;
+}
+
+/* footer
+********************************************************************/
+
+.dokuwiki .wrapper {
+    margin-bottom: 1.4em;
+}
+
+#dokuwiki__footer {
+    margin-bottom: 1em;
+    text-align: center;
+
+    > .pad {
+        font-size: 0.875em;
+    }
+
+    div.license {
+        margin-bottom: 0.5em;
+        font-size: 100%;
+    }
+
+    div.buttons a {
+        img {
+            opacity: 0.5;
+        }
+
+        &:hover img,
+        &:active img,
+        &:focus img {
+            opacity: 1;
+        }
+    }
+
+}
+
+[dir=rtl] #dokuwiki__footer .license img {
+    margin: 0 0 0 .5em;
+}
