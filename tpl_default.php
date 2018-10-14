@@ -120,8 +120,8 @@ $default_layout =
                     {
                         "margin":"auto auto 10px auto",
                         "opacity":"0.5",
-                        "height":"64px",
-                        "width":"64px"
+                        "height":"48px",
+                        "width":"48px"
                     }
                 },
                 {
@@ -130,8 +130,8 @@ $default_layout =
                     {
                         "margin":"10px auto auto auto",
                         "opacity":"0.5",
-                        "height":"64px",
-                        "width":"64px"
+                        "height":"48px",
+                        "width":"48px"
                     }
                 },
                 {

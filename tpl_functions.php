@@ -633,7 +633,7 @@ function tpl_print_grid(array $layout) {
     print(";\n");
     print("    grid-template-rows:");
     for ($row = 0 ; $row < $max_rows ; $row++) {
-        print(" auto");
+        print(" ".$row_size."%");
     }
     print(";\n");
     print("    grid-row-gap: ".$vert_space."%;\n");
