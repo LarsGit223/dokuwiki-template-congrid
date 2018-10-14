@@ -87,10 +87,6 @@ $default_layout =
                 },
                 {
                     "id":"breadcrumbs",
-                    "flex":
-                    {
-                        "direction":"column"
-                    },
                     "css":
                     {
                         "padding":"0",
@@ -101,18 +97,10 @@ $default_layout =
                     "items": ["trace", "youarehere"]
                 },
                 {
-                    "id":"trace",
-                    "css":
-                    {
-                        "height":"100%"
-                    }
+                    "id":"trace"
                 },
                 {
-                    "id":"youarehere",
-                    "css":
-                    {
-                        "height":"100%"
-                    }
+                    "id":"youarehere"
                 },
                 {
                     "id":"scroll-up-area",
@@ -143,6 +131,10 @@ $default_layout =
                 {
                     "id":"title",
                     "border":"semi-transparent",
+                    "flex":
+                    {
+                        "direction":"row"
+                    },
                     "css":
                     {
                         "background-color":"MediumSeaGreen",

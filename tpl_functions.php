@@ -688,6 +688,18 @@ function tpl_print_grid(array $layout) {
 function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
     $divclass = '';
 
+    if ($params['flex']['direction'] == 'column') {
+        $divclass .= 'flex-column ';
+        if ($params['flex']['mode'] == 'same-size') {
+            $divclass .= ' same_height ';
+        }
+    } else if ($params['flex']['direction'] == 'row') {
+        $divclass .= ' flex-row ';
+        if ($params['flex']['mode'] == 'same-size') {
+            $divclass .= ' same_width ';
+        }
+    }
+
     // Assign class for item
     $scroll = '';
     $invalid = false;
@@ -761,17 +773,6 @@ function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
                     $childs = count($params['pages']);
                     $item_type = TEMPLATE_CONTAINER_PAGES;
                     $divclass .= 'container_pages '.$params['id'];
-                }
-                if ($params['flex']['direction'] == 'column') {
-                    $divclass .= ' flex-column';
-                    if ($params['flex']['mode'] == 'same-size') {
-                        $divclass .= ' same_height';
-                    }
-                } else {
-                    $divclass .= ' flex-row';
-                    if ($params['flex']['mode'] == 'same-size') {
-                        $divclass .= ' same_width';
-                    }
                 }
                 $divclass .= ' childs'.$childs;
             }
