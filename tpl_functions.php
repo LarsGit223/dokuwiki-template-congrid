@@ -756,6 +756,9 @@ function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
             $scroll = ' onmouseover="scroll_down();" onmouseout="stop_scroll();"';
         break;
 
+        case 'search':
+        break;
+
         default:
             if ($params['id'] == 'default' && empty($params['items']) &&
                 empty($params['pages'])) {
