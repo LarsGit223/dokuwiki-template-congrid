@@ -768,16 +768,17 @@ function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
                 $item_type = TEMPLATE_INVALID_TYPE;
                 $divclass .= 'grid-invalid';
             } else {
-                if (!empty($params['items'])) {
+                if (!empty($params['items']) && is_array($params['items'])) {
                     $childs = count($params['items']);
                     $item_type = TEMPLATE_CONTAINER_ITEMS;
                     $divclass .= 'container_items '.$params['id'];
-                } else {
+                    $divclass .= ' childs'.$childs;
+                } else if (!empty($params['pages']) && is_array($params['pages'])) {
                     $childs = count($params['pages']);
                     $item_type = TEMPLATE_CONTAINER_PAGES;
                     $divclass .= 'container_pages '.$params['id'];
+                    $divclass .= ' childs'.$childs;
                 }
-                $divclass .= ' childs'.$childs;
             }
         break;
     }
