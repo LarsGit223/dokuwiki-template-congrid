@@ -13,16 +13,16 @@ require_once(dirname(__FILE__).'/tpl_default.php');
 
 /* The type is well-known and by it's name it is clear what to do,
    e.g. 'title', 'content', 'sitetools'... */
-define(TEMPLATE_KNOWN_TYPE, 1);
+define('TEMPLATE_KNOWN_TYPE', 1);
 /* The type is unknown and it is not clear what to do.
    An empty cell will be rendered with some error text. */
-define(TEMPLATE_INVALID_TYPE, 2);
+define('TEMPLATE_INVALID_TYPE', 2);
 /* The type is not known but is a container for other items
    which could be pages or well-known types. */
-define(TEMPLATE_CONTAINER_ITEMS, 3);
+define('TEMPLATE_CONTAINER_ITEMS', 3);
 /* The type is not known but defines a page which shall be rendered.
    This can e.g. be used to render the sidebar. */
-define(TEMPLATE_CONTAINER_PAGES, 4);
+define('TEMPLATE_CONTAINER_PAGES', 4);
 
 /**
  * Check if the given selector matches the current requests context.
