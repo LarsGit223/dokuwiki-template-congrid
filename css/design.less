@@ -5,6 +5,7 @@
  * @author Anika Henke <anika@selfthinker.org>
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Clarence Lee <clarencedglee@gmail.com>
+ * @author LarsDW223
  */
 
 /* tools
@@ -25,37 +26,24 @@
 }
 
 form.search {
-    display: block;
-    position: relative;
-    margin-bottom: 0.5em;
-
     input {
-        width: 18em;
-        padding: .35em 22px .35em .1em;
-    }
-
-    button {
-        background: transparent url(images/search.png) no-repeat 0 0;
-        border-width: 0;
-        width: 19px;
-        height: 14px;
-        text-indent: -99999px;
-        margin-left: -20px;
-        box-shadow: none;
-        padding: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2224%22 height%3D%2224%22 viewBox%3D%220 0 24 24%22%3E%3Cpath d%3D%22M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z%22 fill%3D%22%23666666%22 %2F%3E%3Cpath d%3D%22M0 0h24v24H0z%22 fill%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: 97.5% 50%;
+        background-size: 1em;
+        width: 100%;
     }
 }
 
 [dir=rtl] form.search {
     input {
-        padding: .35em .1em .35em 22px;
-    }
-
-    button {
-        background-position: 5px 0;
-        margin-left: 0;
-        margin-right: -20px;
-        position: relative;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2224%22 height%3D%2224%22 viewBox%3D%220 0 24 24%22%3E%3Cpath d%3D%22M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z%22 fill%3D%22%23666666%22 %2F%3E%3Cpath d%3D%22M0 0h24v24H0z%22 fill%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: 2.5% 50%;
+        background-size: 1em;
+        width: 100%;
     }
 }
 

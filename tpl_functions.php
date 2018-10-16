@@ -259,7 +259,7 @@ function tpl_generate_youarehere() {
  * Print/generate the 'search' section.
  */
 function tpl_generate_search() {
-    tpl_searchform();
+    tpl_congrid_searchform(true, true, false);
     tpl_flush();
 }
 /**
@@ -675,6 +675,71 @@ function tpl_print_grid(array $layout) {
     tpl_flush();
 }
 /**
+ * Print the search form
+ *
+ * If the first parameter is given a div with the ID 'qsearch_out' will
+ * be added which instructs the ajax pagequicksearch to kick in and place
+ * its output into this div. The second parameter controls the propritary
+ * attribute autocomplete. If set to false this attribute will be set with an
+ * value of "off" to instruct the browser to disable it's own built in
+ * autocompletion feature (MSIE and Firefox)
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param bool $ajax
+ * @param bool $autocomplete
+ * @param bool $button
+ * @return bool
+ */
+function tpl_congrid_searchform($ajax = true, $autocomplete = true, $button = true) {
+    global $lang;
+    global $ACT;
+    global $QUERY;
+    global $ID;
+
+    // don't print the search form if search action has been disabled
+    if(!actionOK('search')) return false;
+
+    $searchForm = new dokuwiki\Form\Form([
+        'action' => wl(),
+        'method' => 'get',
+        'role' => 'search',
+        'class' => 'search',
+        'id' => 'dw__search',
+    ], true);
+    $searchForm->addTagOpen('div')->addClass('no');
+    $searchForm->setHiddenField('do', 'search');
+    $searchForm->setHiddenField('id', $ID);
+    $searchForm->addTextInput('q')
+        ->addClass('edit')
+        ->attrs([
+            'title' => '[F]',
+            'accesskey' => 'f',
+            'placeholder' => $lang['btn_search'],
+            'autocomplete' => $autocomplete ? 'on' : 'off',
+        ])
+        ->id('qsearch__in')
+        ->val($ACT === 'search' ? $QUERY : '')
+        ->useInput(false)
+    ;
+    if ($button) {
+        $searchForm->addButton('', $lang['btn_search'])->attrs([
+            'type' => 'submit',
+            'title' => $lang['btn_search'],
+        ]);
+    }
+    if ($ajax) {
+        $searchForm->addTagOpen('div')->id('qsearch__out')->addClass('ajax_qsearch JSpopup');
+        $searchForm->addTagClose('div');
+    }
+    $searchForm->addTagClose('div');
+    trigger_event('FORM_QUICKSEARCH_OUTPUT', $searchForm);
+
+    echo $searchForm->toHTML();
+
+    return true;
+}
+/**
  * Print a div/cell's content of the grid.
  * 
  * This prints the surrounding div and then calls the appropriate
@@ -757,6 +822,7 @@ function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
         break;
 
         case 'search':
+            $divclass .= 'search';
         break;
 
         default:
