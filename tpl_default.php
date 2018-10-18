@@ -24,7 +24,7 @@ $default_layout =
             "toc":"on-page",
             "grid":
             [
-                [ "title",      "title",      "title",       "content", "content", "content", "content", "content", "content", "space" ],
+                [ "title",      "title",      "title",       "content", "content", "content", "content", "content", "content", "search" ],
                 [ "title",      "title",      "title",       "content", "content", "content", "content", "content", "content", "space" ],
                 [ "breadcrumbs","breadcrumbs","breadcrumbs", "content", "content", "content", "content", "content", "content", "scroll-up-area"      ],
                 [ "breadcrumbs","breadcrumbs","breadcrumbs", "content", "content", "content", "content", "content", "content", "pagetools"      ],
@@ -141,6 +141,17 @@ $default_layout =
                         "color":"white",
                         "text-shadow":"-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
                         "opacity":"0.85"
+                    }
+                },
+                {
+                    "id":"search",
+                    "css":
+                    {
+                        "font-size":"1.25em",
+                        "background":"transparent",
+                        "margin":"auto 0",
+                        "width":"125%",
+                        "padding":"0 1em"
                     }
                 },
                 {
