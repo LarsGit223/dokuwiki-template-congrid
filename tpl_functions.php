@@ -331,13 +331,85 @@ function tpl_generate_docinfo($inside=true) {
     tpl_flush();
 }
 /**
+ * Places the TOC where the function is called
+ *
+ * If you use this you most probably want to call tpl_content with
+ * a false argument
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ *
+ * @param bool $return  Should the TOC be returned instead to be printed?
+ * @param int  $columns Number of columns
+ * @return string
+ */
+function tpl_congrid_toc($return = false, $columns=1) {
+    global $TOC;
+    global $ACT;
+    global $ID;
+    global $REV;
+    global $INFO;
+    global $conf;
+    global $INPUT;
+    $toc = array();
+
+    if(is_array($TOC)) {
+        // if a TOC was prepared in global scope, always use it
+        $toc = $TOC;
+    } elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
+        // get TOC from metadata, render if neccessary
+        $meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
+        if(isset($meta['internal']['toc'])) {
+            $tocok = $meta['internal']['toc'];
+        } else {
+            $tocok = true;
+        }
+        $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
+        if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
+            $toc = array();
+        }
+    } elseif($ACT == 'admin') {
+        // try to load admin plugin TOC
+        /** @var $plugin DokuWiki_Admin_Plugin */
+        if ($plugin = plugin_getRequestAdminPlugin()) {
+            $toc = $plugin->getTOC();
+            $TOC = $toc; // avoid later rebuild
+        }
+    }
+
+    trigger_event('TPL_TOC_RENDER', $toc, null, false);
+
+    $html = '';
+    if (count($toc) > 0) {
+        global $lang;
+        $html  = '<!-- TOC START -->'.DOKU_LF;
+        $html .= '<div id="dw__toc" class="dw__toc">'.DOKU_LF;
+        $html .= '<h3 class="toggle">';
+        $html .= $lang['toc'];
+        $html .= '</h3>'.DOKU_LF;
+        if ($columns > 1) {
+            $html .= '<div style="column-count: '.$columns.'; column-fill: balance;">'.DOKU_LF;
+        } else {
+            $html .= '<div>'.DOKU_LF;
+        }
+        $html .= html_buildlist($toc,'toc','html_list_toc','html_li_default',true);
+        $html .= '</div>'.DOKU_LF.'</div>'.DOKU_LF;
+        $html .= '<!-- TOC END -->'.DOKU_LF;
+    }
+
+
+    /*$html = html_TOC($toc);*/
+    if($return) return $html;
+    echo $html;
+    return '';
+}
+/**
  * Print/generate the 'toc' section.
  * 
  * If this is called then there is an extra div containing the toc.
  * Most likely 'tpl_generate_content()' was called with $toc == false.
  */
-function tpl_generate_toc() {
-    tpl_toc();
+function tpl_generate_toc($columns=1) {
+    tpl_congrid_toc(false, $columns);
     tpl_flush();
 }
 /**
@@ -893,7 +965,7 @@ function tpl_generate_div(array &$layout, $type, array $params, $level=1) {
     switch ($type)
     {
         case 'toc':
-            tpl_generate_toc();
+            tpl_generate_toc($params['toc-columns']);
         break;
 
         case 'content':
